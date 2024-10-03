@@ -1,0 +1,17 @@
+plugins {
+    id 'buildlogic.java-application-conventions'
+}
+
+dependencies {
+    implementation 'org.apache.commons:commons-text'
+    testImplementation 'junit:junit:4.13.2'
+    implementation project(':lib')
+}
+
+application {
+    mainClass = 'com.cynaptec.connectconsole.App'
+}
+
+tasks.named('run') {
+    standardInput = System.in  // Redirect standard input to the terminal
+}
