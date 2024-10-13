@@ -5,5 +5,5 @@ Full TDD example of connect4 logic and console app
 ```cmd
 git clone https://github.com/amcginlay/connect4-gradle.git
 cd connect4-gradle
-./gradlew run
+./gradlew --quiet --console=plain run
 ```
