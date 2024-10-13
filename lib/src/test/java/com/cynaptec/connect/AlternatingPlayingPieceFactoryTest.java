@@ -1,17 +1,15 @@
 package com.cynaptec.connect;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import com.cynaptec.connect.IPlayingPiece;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AlternatingPlayingPieceFactoryTest {
 
 	private IPlayingPieceFactory playingPieceFactory;
 	
-	@Before
+	@BeforeEach
 	public void before() {
 		playingPieceFactory = new AlternatingPlayingPieceFactory(
 				new P1PlayingPieceFactory(), 
