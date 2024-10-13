@@ -1,9 +1,9 @@
 package com.cynaptec.connect;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ConnectFourPlayingServiceTest {
 
@@ -13,7 +13,7 @@ public class ConnectFourPlayingServiceTest {
 	private ConnectSolutionService connectSolutionService;
 	private ConnectFourPlayingService connectFourPlayingService;
 
-	@Before
+	@BeforeEach
 	public void before() {
 		playingBoard = ConnectFourPlayingService.createPlayingBoard();
 		previewablePlayingPieceFactory = ConnectFourPlayingService.createPreviewablePlayingPieceFactory(true);
@@ -26,19 +26,25 @@ public class ConnectFourPlayingServiceTest {
 		);
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test()
 	public void test_Constructor_ThrowsANullPointerException_WhenPlayingBoardIsNull() {
-		new ConnectFourPlayingService(null, previewablePlayingPieceFactory, connectSolutionService);
+		assertThrows(NullPointerException.class, () -> {
+			new ConnectFourPlayingService(null, previewablePlayingPieceFactory, connectSolutionService);
+		});
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test()
 	public void test_Constructor_ThrowsANullPointerException_WhenPlayingPieceFactoryIsNull() {
-		new ConnectFourPlayingService(playingBoard, null, connectSolutionService);
+		assertThrows(NullPointerException.class, () -> {
+			new ConnectFourPlayingService(playingBoard, null, connectSolutionService);
+		});
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test()
 	public void test_Constructor_ThrowsANullPointerException_WhenConnectSolutionServiceIsNull() {
-		new ConnectFourPlayingService(playingBoard, previewablePlayingPieceFactory, null);
+		assertThrows(NullPointerException.class, () -> {
+			new ConnectFourPlayingService(playingBoard, previewablePlayingPieceFactory, null);
+		});
 	}
 
 	public void test_GetNextPlayerName_ReturnsPlayerOne_WhenGameIsStarted() throws IllegalMoveException {
@@ -47,9 +53,11 @@ public class ConnectFourPlayingServiceTest {
 		assertEquals("Player One", nextPlayer);
 	}	
 	
-	@Test(expected=IllegalMoveException.class)
+	@Test()
 	public void test_TakeTurn_ThrowsAnIllegalMoveException_WhenStringInputNotRecognised() throws IllegalMoveException {
-		connectFourPlayingService.takeTurn("illegal argument");
+		assertThrows(IllegalMoveException.class, () -> {
+			connectFourPlayingService.takeTurn("illegal argument");
+		});
 	}
 	
 	public void test_TakeTurn_GameEntersAbortedState_WhenGameIsQuit() throws IllegalMoveException {
@@ -57,31 +65,39 @@ public class ConnectFourPlayingServiceTest {
 		assertTrue(connectFourPlayingService.getIsGameAborted());
 	}
 	
-	@Test(expected=IllegalMoveException.class)
+	@Test()
 	public void test_TakeTurn_ThrowsAnIllegalMoveException_WhenGameIsAborted() throws IllegalMoveException {
-		connectFourPlayingService.takeTurn("q");
-		connectFourPlayingService.takeTurn(1);
-	}
-	
-	@Test(expected=IllegalMoveException.class)
-	public void test_TakeTurn_ThrowsAnIllegalMoveException_WhenXIsLessThanOne() throws IllegalMoveException {
-		connectFourPlayingService.takeTurn(0);
-	}
-	
-	@Test(expected=IllegalMoveException.class)
-	public void test_TakeTurn_ThrowsAnIllegalMoveException_WhenXIsGreaterThanConnectFourSize() throws IllegalMoveException {
-		connectFourPlayingService.takeTurn(new ConnectFourPlayingBoardDimensions().getSizeX() + 1);
-	}
-	
-	@Test(expected=IllegalMoveException.class)
-	public void test_TakeTurn_ThrowsAnIllegalMoveConnectException_WhenColumnIsFull() throws IllegalMoveException {
-		int yMax = new ConnectFourPlayingBoardDimensions().getSizeY();
-		// fill the column ...
-		for (int y = 1; y <= yMax; y++) {
+		assertThrows(IllegalMoveException.class, () -> {
+			connectFourPlayingService.takeTurn("q");
 			connectFourPlayingService.takeTurn(1);
-		}
-		// ... one more should cause an exception
-		connectFourPlayingService.takeTurn(1);
+		});
+	}
+	
+	@Test()
+	public void test_TakeTurn_ThrowsAnIllegalMoveException_WhenXIsLessThanOne() throws IllegalMoveException {
+		assertThrows(IllegalMoveException.class, () -> {
+			connectFourPlayingService.takeTurn(0);
+		});
+	}
+	
+	@Test()
+	public void test_TakeTurn_ThrowsAnIllegalMoveException_WhenXIsGreaterThanConnectFourSize() throws IllegalMoveException {
+		assertThrows(IllegalMoveException.class, () -> {
+			connectFourPlayingService.takeTurn(new ConnectFourPlayingBoardDimensions().getSizeX() + 1);
+		});
+	}
+	
+	@Test()
+	public void test_TakeTurn_ThrowsAnIllegalMoveConnectException_WhenColumnIsFull() throws IllegalMoveException {
+		assertThrows(IllegalMoveException.class, () -> {
+			int yMax = new ConnectFourPlayingBoardDimensions().getSizeY();
+			// fill the column ...
+			for (int y = 1; y <= yMax; y++) {
+				connectFourPlayingService.takeTurn(1);
+			}
+			// ... one more should cause an exception
+			connectFourPlayingService.takeTurn(1);
+		});
 	}
 	
 	@Test
@@ -102,10 +118,12 @@ public class ConnectFourPlayingServiceTest {
 	}
 	
 
-	@Test(expected=IllegalMoveException.class)
+	@Test()
 	public void test_TakeTurn_WillThrowIllegalMoveException_WhenGameIsOver() throws IllegalMoveException {
-		fillPlayingBoardToSimulateTiedMatch();
-		connectFourPlayingService.takeTurn(1);
+		assertThrows(IllegalMoveException.class, () -> {
+			fillPlayingBoardToSimulateTiedMatch();
+			connectFourPlayingService.takeTurn(1);
+		});
 	}
 	
 	@Test

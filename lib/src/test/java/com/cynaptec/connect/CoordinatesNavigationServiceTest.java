@@ -1,16 +1,16 @@
 package com.cynaptec.connect;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CoordinatesNavigationServiceTest {
 
 	CoordinatesNavigationService coordinatesNavigationService;
 	Coordinates origin;
 	
-	@Before
+	@BeforeEach
 	public void before() {
 		coordinatesNavigationService = new CoordinatesNavigationService();
 		origin = new Coordinates(1, 1);

@@ -1,9 +1,9 @@
 package com.cynaptec.connect;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.cynaptec.connect.ConnectFourPlayingBoardDimensions;
 import com.cynaptec.connect.IPlayingPiece;
@@ -15,16 +15,18 @@ public class PlayingBoardReaderTest {
 	private PlayingBoard playingBoard;
 	private PlayingBoardReader playingBoardReader;
 	
-	@Before
+	@BeforeEach
 	public void before() {
 		PlayingBoardDimensions playingBoardDimensions = new ConnectFourPlayingBoardDimensions();
 		playingBoard = new PlayingBoard(playingBoardDimensions);
 		playingBoardReader = new PlayingBoardReader(playingBoard);
 	}
 	
-	@Test (expected=NullPointerException.class)
+	@Test ()
 	public void test_Constructor_ThrowsNullPointerException_WhenPassedNullArgument() {
-		new PlayingBoardReader(null);
+		assertThrows(NullPointerException.class, () -> {
+			new PlayingBoardReader(null);
+		});
 	}
 	
 	@Test
@@ -41,14 +43,18 @@ public class PlayingBoardReaderTest {
 		assertEquals(yOriginal, yReader);
 	}
 
-	@Test (expected=NullPointerException.class)
+	@Test ()
 	public void test_GetPieceAt_ThrowsNullPointerException_WhenWhenNoCoordinateProvided() {
-		playingBoardReader.getPieceAt(null);
+		assertThrows(NullPointerException.class, () -> {
+			playingBoardReader.getPieceAt(null);
+		});
 	}	
 
-	@Test (expected=IllegalArgumentException.class)
+	@Test ()
 	public void test_GetPieceAt_ThrowsIllegalArgumentException_WhenAttemptingToInspectAnOutOfBoundsLocationMax() {
-		playingBoardReader.getPieceAt(new Coordinates(playingBoardReader.getSizeX() + 1, 1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			playingBoardReader.getPieceAt(new Coordinates(playingBoardReader.getSizeX() + 1, 1));
+		});
 	}	
 
 	@Test

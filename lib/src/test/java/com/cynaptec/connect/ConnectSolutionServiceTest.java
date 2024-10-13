@@ -1,11 +1,11 @@
 package com.cynaptec.connect;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ConnectSolutionServiceTest {
 
@@ -16,7 +16,7 @@ public class ConnectSolutionServiceTest {
 	private PlayingBoardSequenceBuilder playingBoardSequenceBuilder;
 	private Coordinates origin;
 	
-	@Before
+	@BeforeEach
 	public void before() {
 		playingBoard = new PlayingBoard(new ConnectFourPlayingBoardDimensions());
 		coordinatesNavigationService = new CoordinatesNavigationService();
@@ -29,19 +29,25 @@ public class ConnectSolutionServiceTest {
 		origin = new Coordinates(1, 1);
 	}
 	
-	@Test(expected=NullPointerException.class)
+	@Test()
 	public void test_Constructor_ThrowsANullPointerException_WhenPlayingBoardIsNull() {
-		new ConnectSolutionService(null, coordinatesNavigationService, ConnectFourPlayingService.CONNECTED_PIECES_TO_WIN);
+		assertThrows(NullPointerException.class, () -> {
+			new ConnectSolutionService(null, coordinatesNavigationService, ConnectFourPlayingService.CONNECTED_PIECES_TO_WIN);
+		});
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test()
 	public void test_Constructor_ThrowsANullPointerException_WhenCoordinateNavigationServiceIsNull() {
-		new ConnectSolutionService(playingBoard, null, ConnectFourPlayingService.CONNECTED_PIECES_TO_WIN);
+		assertThrows(NullPointerException.class, () -> {
+			new ConnectSolutionService(playingBoard, null, ConnectFourPlayingService.CONNECTED_PIECES_TO_WIN);
+		});
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test()
 	public void test_Constructor_ThrowsAnIllegalArgumentException_WhenConnectedPiecesToWinLessThanOne() {
-		new ConnectSolutionService(playingBoard, coordinatesNavigationService, 0);
+		assertThrows(IllegalArgumentException.class, () -> {
+			new ConnectSolutionService(playingBoard, coordinatesNavigationService, 0);
+		});
 	}
 
 	@Test

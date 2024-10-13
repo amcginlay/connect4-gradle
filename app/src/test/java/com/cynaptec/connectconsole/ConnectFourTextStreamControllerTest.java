@@ -1,11 +1,11 @@
 package com.cynaptec.connectconsole;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.cynaptec.connect.ConnectFourPlayingServiceFactory;
 
@@ -17,7 +17,7 @@ public class ConnectFourTextStreamControllerTest {
 	
 	private ByteArrayOutputStream testOutput;
 
-	@Before
+	@BeforeEach
 	public void before() {
 		modelFactory = new ConnectFourPlayingServiceFactory();
 		testOutput = new ByteArrayOutputStream();

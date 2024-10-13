@@ -4,7 +4,6 @@ plugins {
 
 dependencies {
     implementation 'org.apache.commons:commons-text'
-    testImplementation 'junit:junit:4.13.2'
     implementation project(':lib')
 }
 
